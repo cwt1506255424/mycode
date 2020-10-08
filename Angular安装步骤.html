@@ -1,0 +1,225 @@
+ 
+安装angular-cli脚手架构建工具
+
+使用 npm/cnpm 命令安装 angular/cli （只需要安装一次）
+cnpm install -g @angular/cli 或者 cnpm install
+
+$ cnpm install -g @angular/cli
+	# 回车，等待安装...
+	$ ng v
+	# 回车，若出现angular信息说明表示成功
+	 
+ 一、用angular-cli构建项目
+ 
+ 打开要创建项目的目录
+ 
+	# 创建项目
+	$ ng new angulardemo01
+	
+	# 这里需要进行一些配置，默认回车即可
+
+	To get started:
+
+	 cd angulardemo01
+	 ng serve --open
+
+二、创建组件：
+ng g component components/news
+
+
+// 引入表单相关的模块才可以用双向数据绑定
+import { FormsModule } from '@angular/forms';
+
+ imports: [
+    FormsModule,
+  ],
+
+
+
+三、定义数据：
+public title:string="我是一个新闻组件";
+<div>{{title}}</div>
+public useInfo:object={
+    name:'张三',
+    age:'18',
+  };
+public list:any[]=[111,222,333];
+
+<ul>
+  <li *ngFor="let item of list">{{item}}</li>
+</ul>
+
+public content:any='<h3>我是h3标签</h3>';
+<div [innerHTML]="content"></div>
+
+四、引入图片：
+
+<img src="assets/images/1.jpg" alt="">
+
+public picUrl:string="http://pix1.tvzhe.com/focuspic/drama/71237/cate_focus_pic.jpg";
+<img [src]="picUrl" alt="">
+
+五、循环显示索引值：
+public news:any=[
+    {
+      title:'新闻1'
+    },
+    {
+      title:'新闻2'
+    },
+    {
+      title:'新闻3'
+    }
+  ]
+<ul>
+  <li *ngFor="let item of news;let key=index">
+    {{key}}--------{{item.title}}
+  </li>
+</ul>
+
+六、条件判断：
+6.1*ngIf
+
+public flag:boolean=false;
+<div *ngIf="flag">
+  <img src="assets/images/1.jpg" alt="">
+</div>
+<div *ngIf="!flag">
+  <img [src]="picUrl" alt="">
+</div>
+
+6.2*ngSwitch
+
+public orderState:number=1;
+<span [ngSwitch]="orderState">
+  <p *ngSwitchCase="1">对方水电费</p>
+  <p *ngSwitchDefault>默认</p>
+</span>
+
+
+七、属性： [ngClass]、[ngStyle]
+
+<div [ngClass]="{'red':true,'blue':true}">ngClass</div>
+<div [ngClass]="{'red':flag,'blue':!flag}">ngClass</div>
+
+八、管道：
+
+public today:any=new Date();
+<div>{{today | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+
+
+九、创建服务命令
+ng g service my-new-service 
+
+//创建到指定目录下面
+ng g service services/storage
+
+app.module
+//引入并且配置服务
+import {StorageService} from './services/storage.service';
+//配置服务
+  providers: [ StorageService ],
+
+
+
+十、Dom 操作
+1.原生
+  ngAfterViewInit(){
+    //视图加载完成以后触发的方法dom加载完
+
+    let oBox:any=document.getElementById('box');
+    console.log(oBox.innerHTML);
+
+  }
+
+2.ViewChild
+<div #myBox>我是一个DOM节点</div>
+//引入ViewChild
+import { Component, OnInit, ViewChild } from '@angular/core';
+//获取dom节点
+  @ViewChild('myBox')myBox:any;
+
+  ngAfterViewInit(){
+    //视图加载完成以后触发的方法dom加载完
+
+    console.log(this.myBox.nativeElement);
+
+  }
+
+十一、父子组件中通过 ViewChild 调用子组件的方法
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
